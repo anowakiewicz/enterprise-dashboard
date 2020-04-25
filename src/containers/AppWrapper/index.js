@@ -6,7 +6,7 @@ const AppWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f9f9f9;
+  background-color: #f8f8f8;
 `;
 
 export default AppWrapper;

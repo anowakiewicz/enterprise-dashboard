@@ -5,6 +5,8 @@ import Row from "./Row";
 import Column from "./Column";
 import InfoBox from "../../components/InfoBox";
 import ProductionBox from "../../components/ProductionBox";
+import WorldMap from "../../components/WorldMap";
+import Summary from "../../components/Summary";
 
 export const Dashboard = (props) => {
   return (
@@ -18,8 +20,11 @@ export const Dashboard = (props) => {
       <Row>
         <Column>
           <ProductionBox />
+          <Summary />
         </Column>
-        <Column></Column>
+        <Column>
+          <WorldMap />
+        </Column>
       </Row>
     </Wrapper>
   );
