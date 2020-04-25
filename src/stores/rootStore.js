@@ -1,17 +1,9 @@
-import _isFunction from "lodash/isFunction";
+import UserDataStore from "./userDataStore";
+import UiStore from "./uiStore";
 
 export default class RootStore {
   constructor() {
-    this.injectablesNames = [];
-  }
-
-  init() {
-    // initialize stores
-    this.injectablesNames.forEach((key) => {
-      const obj = this[key];
-      if (_isFunction(obj.init)) {
-        obj.init();
-      }
-    });
+    this.userdataStore = new UserDataStore(this);
+    this.uiStore = new UiStore(this);
   }
 }
