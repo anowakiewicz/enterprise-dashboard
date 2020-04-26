@@ -1,5 +1,6 @@
 import React, { memo, Component } from "react";
 import { inject, observer } from "mobx-react";
+import { computed } from "mobx";
 import PropTypes from "prop-types";
 import {
   ZoomableGroup,
@@ -8,7 +9,6 @@ import {
   Geography,
   Marker,
 } from "react-simple-maps";
-import { computed } from "mobx";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";

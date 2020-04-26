@@ -4,7 +4,7 @@ const ComponentWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: white;
   min-height: ${(props) => props.height};
   box-shadow: 7px 6px 3px -2px rgba(233, 233, 233, 1);
@@ -14,6 +14,8 @@ const ComponentWrapper = styled.div`
   @media (max-width: 1024px) {
     margin-top: unset;
     margin-bottom: ${(props) => props.marginBottom || "unset"};
+    min-height: unset;
+    height: auto;
   }
 `;
 

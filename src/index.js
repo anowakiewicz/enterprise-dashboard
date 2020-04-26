@@ -11,11 +11,7 @@ import "./index.css";
 const rootStore = new RootStore();
 
 ReactDOM.render(
-  <Provider
-    rootStore={rootStore}
-    userDataStore={rootStore.userDataStore}
-    uiStore={rootStore.uiStore}
-  >
+  <Provider rootStore={rootStore} userDataStore={rootStore.userDataStore}>
     <React.StrictMode>
       <App />
     </React.StrictMode>

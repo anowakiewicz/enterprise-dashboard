@@ -10,7 +10,7 @@ import SelectOption from "../../common-components/SelectOption";
 import Header from "./Header";
 import InnerWrapper from "./InnerWrapper";
 import InfoBoxContainer from "./InfoBoxContainer";
-import MonthlyStats from "./MonthlyStats";
+import GreyBar from "./GreyBar";
 import Icon from "./Icon";
 
 @inject("userDataStore")
@@ -50,10 +50,10 @@ class InfoBox extends Component {
           {name}
           <Header {...data} />
         </InnerWrapper>
-        <MonthlyStats>
+        <GreyBar>
           {this.selectUser}
           <Icon name={data.type} />
-        </MonthlyStats>
+        </GreyBar>
       </InfoBoxContainer>
     );
   }

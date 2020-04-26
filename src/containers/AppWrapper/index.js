@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 const AppWrapper = styled.div`
-  width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  padding: 30px;
   background-color: #f8f8f8;
 `;
 

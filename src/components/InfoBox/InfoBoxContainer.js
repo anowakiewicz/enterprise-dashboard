@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import InnerWrapper from "./InnerWrapper";
+import GreyBar from "./GreyBar";
 
 const InfoBoxContainer = styled.div`
   min-height: 200px;
@@ -15,6 +16,9 @@ const InfoBoxContainer = styled.div`
     & ${InnerWrapper} {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+    }
+    & ${GreyBar} {
       justify-content: space-between;
     }
   }
