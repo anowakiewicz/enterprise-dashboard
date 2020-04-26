@@ -24,8 +24,7 @@ class InfoBox extends Component {
 
   @action.bound
   handleOnSelectChange(e) {
-    const { changeUserToSearchFor } = this.props.userDataStore;
-    changeUserToSearchFor(e.target.value);
+    this.props.userDataStore.changeUserToSearchFor(e.target.value);
   }
 
   @computed

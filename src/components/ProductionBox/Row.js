@@ -5,7 +5,7 @@ const Row = styled.div`
   min-height: 40px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.center ? "center" : "space-between")};
 `;
 
 export default Row;

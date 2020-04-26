@@ -3,11 +3,11 @@ import axios from "axios";
 
 class UserDataStore {
   @observable searchName;
-  @observable searchResults;
-  @observable user;
-  @observable repos;
-  @observable followers;
-  @observable subscriptions;
+  @observable searchResults = [];
+  @observable user = null;
+  @observable repos = [];
+  @observable followers = [];
+  @observable subscriptions = [];
   @observable fetchingData;
 
   constructor(rootStore) {
@@ -70,25 +70,34 @@ class UserDataStore {
     return [
       {
         title: "User's name",
-        name: this.user || null,
-        result: this.searchResults || [],
+        name: this.user,
+        result: this.searchResults,
         type: "search",
       },
       {
         title: "User's repositories",
-        result: this.repos || [],
+        result: this.repos,
         type: "repos",
       },
       {
         title: "User's followers",
-        result: this.followers || [],
+        result: this.followers,
         type: "followers",
       },
       {
         title: "User's subscriptions",
-        result: this.subscriptions || [],
+        result: this.subscriptions,
         type: "subscriptions",
       },
+    ];
+  }
+
+  @computed
+  get barChartData() {
+    return [
+      { name: "Rep.", pv: this.repos.length },
+      { name: "Fol.", pv: this.followers.length },
+      { name: "Sub.", pv: this.subscriptions.length },
     ];
   }
 }

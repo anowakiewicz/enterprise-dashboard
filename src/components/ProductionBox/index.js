@@ -8,14 +8,18 @@ import Row from "./Row";
 import Icon from "./Icon";
 import ButtonsWrap from "./ButtonsWrap";
 
+import Chart from "./Chart";
+
 const ProductionBox = () => {
   return (
     <ComponentWrapper height="450px" marginBottom="10px">
       <Row>
-        <H2>Production</H2>
+        <H2>Chart</H2>
         <Icon />
       </Row>
-      <Row>chart</Row>
+      <Row center>
+        <Chart />
+      </Row>
       <Row>
         <ButtonsWrap>
           <Button>Export</Button>
