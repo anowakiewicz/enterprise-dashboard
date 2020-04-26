@@ -1,8 +1,9 @@
-import { observable, action, runInAction, reaction } from "mobx";
+import { observable, action, runInAction, reaction, computed } from "mobx";
 import axios from "axios";
 
 class UserDataStore {
   @observable searchName;
+  @observable searchResults;
   @observable user;
   @observable repos;
   @observable followers;
@@ -14,14 +15,20 @@ class UserDataStore {
 
     reaction(
       () => this.searchName,
-      () => this.searchForUser
+      () => this.searchForUser()
     );
   }
 
-  async fetchFromGithub(endpoint) {
+  async fetchUserFromGithub(endpoint) {
     const url = `https://api.github.com${endpoint}?client_id=my_client_id&client_secret=my_client_secret_id`;
-    const response = await axios.get(url);
-    return await response.json();
+    const response = await axios.get(url, { crossDomain: true });
+    return await response.data;
+  }
+
+  async searchGithubForUsers(endpoint) {
+    const url = `https://api.github.com${endpoint}`;
+    const response = await axios.get(url, { crossDomain: true });
+    return await response.data;
   }
 
   @action("Change User to search for")
@@ -34,21 +41,56 @@ class UserDataStore {
     if (!this.searchName) return;
     this.fetchingData = true;
 
-    const [user, repos, followers, subsriptions] = await Promise.all([
-      this.fetchFromGithub(`/users/${this.searchName}`),
-      this.fetchFromGithub(`/users/${this.searchName}/repos`),
-      this.fetchFromGithub(`/users/${this.searchName}/followers`),
-      this.fetchFromGithub(`/users/${this.searchName}/subscriptions`),
+    const [
+      user,
+      repos,
+      followers,
+      subscriptions,
+      searchResults,
+    ] = await Promise.all([
+      this.fetchUserFromGithub(`/users/${this.searchName}`),
+      this.fetchUserFromGithub(`/users/${this.searchName}/repos`),
+      this.fetchUserFromGithub(`/users/${this.searchName}/followers`),
+      this.fetchUserFromGithub(`/users/${this.searchName}/subscriptions`),
+      this.searchGithubForUsers(`/search/users?q=${this.searchName}`),
     ]);
 
     runInAction("Update State after fetching Github's Data", () => {
       this.user = user;
       this.repos = repos;
       this.followers = followers;
-      this.subscriptions = subsriptions;
+      this.subscriptions = subscriptions;
+      this.searchResults = searchResults;
       this.fetchingData = false;
     });
   };
+
+  @computed
+  get userInfo() {
+    return [
+      {
+        title: "User's name",
+        name: this.user || null,
+        result: this.searchResults || [],
+        type: "search",
+      },
+      {
+        title: "User's repositories",
+        result: this.repos || [],
+        type: "repos",
+      },
+      {
+        title: "User's followers",
+        result: this.followers || [],
+        type: "followers",
+      },
+      {
+        title: "User's subscriptions",
+        result: this.subscriptions || [],
+        type: "subscriptions",
+      },
+    ];
+  }
 }
 
 export default UserDataStore;

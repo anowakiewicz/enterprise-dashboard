@@ -30,25 +30,25 @@ const RedIconWrap = styled(IconWrap)`
 const Icon = ({ name }) => {
   const renderIcon = (name) => {
     switch (name) {
-      case "profit":
+      case "search":
         return (
           <BlueIconWrap>
-            <DynamicFeed style={{ color: "#fff" }} />
+            <Person style={{ color: "#fff" }} />
           </BlueIconWrap>
         );
-      case "user":
+      case "repos":
         return (
           <GreenIconWrap>
-            <Person style={{ color: "#fff" }} />
+            <DynamicFeed style={{ color: "#fff" }} />
           </GreenIconWrap>
         );
-      case "orders":
+      case "followers":
         return (
           <OrangeIconWrap>
             <BarChart style={{ color: "#fff" }} />
           </OrangeIconWrap>
         );
-      case "complaints":
+      case "subscriptions":
         return (
           <RedIconWrap>
             <MoreHoriz style={{ color: "#fff" }} />

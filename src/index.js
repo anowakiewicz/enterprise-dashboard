@@ -8,8 +8,14 @@ import RootStore from "./stores/rootStore";
 import "normalize.css";
 import "./index.css";
 
+const rootStore = new RootStore();
+
 ReactDOM.render(
-  <Provider rootStore={new RootStore()}>
+  <Provider
+    rootStore={rootStore}
+    userDataStore={rootStore.userDataStore}
+    uiStore={rootStore.uiStore}
+  >
     <React.StrictMode>
       <App />
     </React.StrictMode>

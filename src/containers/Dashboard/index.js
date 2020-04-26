@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { observer } from "mobx-react";
-// import { computed } from "mobx";
+import { observer, inject } from "mobx-react";
+import { computed } from "mobx";
+import PropTypes from "prop-types";
 
 import Wrapper from "./Wrapper";
 import Row from "./Row";
@@ -10,20 +11,25 @@ import ProductionBox from "../../components/ProductionBox";
 import WorldMap from "../../components/WorldMap";
 import Summary from "../../components/Summary";
 
+@inject("userDataStore")
 @observer
 class Dashboard extends Component {
-  // @computed
-  // // get user
+  static propTypes = {
+    userDataStore: PropTypes.object,
+  };
+
+  @computed
+  get infoBoxes() {
+    const { userInfo } = this.props.userDataStore;
+    return userInfo.map((info, idx) => (
+      <InfoBox key={`info-box-${idx}`} data={info} />
+    ));
+  }
 
   render() {
     return (
       <Wrapper>
-        <Row>
-          <InfoBox name="profit" />
-          <InfoBox name="user" />
-          <InfoBox name="orders" />
-          <InfoBox name="complaints" />
-        </Row>
+        <Row>{this.infoBoxes}</Row>
         <Row>
           <Column>
             <ProductionBox />

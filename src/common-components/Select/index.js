@@ -8,7 +8,6 @@ const Select = styled.select`
   padding-left: 5px;
   font-size: 14px;
   border: none;
-  margin: 0 0 10px 5px;
   outline: none;
 `;
 
