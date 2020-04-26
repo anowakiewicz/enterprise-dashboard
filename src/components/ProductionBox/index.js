@@ -12,7 +12,7 @@ import Chart from "./Chart";
 
 const ProductionBox = () => {
   return (
-    <ComponentWrapper height="450px" marginBottom="10px">
+    <ComponentWrapper height="300px" marginBottom="10px">
       <Row>
         <H2>Chart</H2>
         <Icon />

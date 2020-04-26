@@ -14,16 +14,16 @@ import {
 @observer
 class Chart extends Component {
   render() {
-    const { barChartData } = this.props.userDataStore;
+    const { userChartData } = this.props.userDataStore;
 
     return (
       <ResponsiveContainer width="90%" height={330}>
-        <BarChart data={barChartData} maxBarSize={20} layout={"vertical"}>
+        <BarChart data={userChartData} maxBarSize={20} layout={"vertical"}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type={"number"} orientation={"top"} />
           <YAxis type={"category"} orientation={"left"} dataKey={"name"} />
           <Tooltip></Tooltip>
-          <Bar dataKey={"pv"} fill={"#8884d8"} radius={4} />
+          <Bar dataKey={"amount"} fill={"#8884d8"} radius={4} />
         </BarChart>
       </ResponsiveContainer>
     );

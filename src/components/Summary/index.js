@@ -6,7 +6,7 @@ import ComponentWrapper from "../../containers/ComponentWrapper";
 class Summary extends Component {
   render() {
     return (
-      <ComponentWrapper height="190px">
+      <ComponentWrapper height="150px">
         <H2>Summary</H2>
       </ComponentWrapper>
     );

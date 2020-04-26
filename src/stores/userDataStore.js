@@ -1,5 +1,6 @@
 import { observable, action, runInAction, reaction, computed } from "mobx";
 import axios from "axios";
+import Geocode from "react-geocode";
 
 class UserDataStore {
   @observable searchName;
@@ -9,13 +10,20 @@ class UserDataStore {
   @observable followers = [];
   @observable subscriptions = [];
   @observable fetchingData;
+  @observable location;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
+    Geocode.setApiKey("AIzaSyDsKiDe4f6pSRKoW04qDvi3_c76F6jzC_E");
 
     reaction(
       () => this.searchName,
       () => this.searchForUser()
+    );
+
+    reaction(
+      () => this.user,
+      () => this.userLocation()
     );
   }
 
@@ -53,6 +61,7 @@ class UserDataStore {
       this.fetchUserFromGithub(`/users/${this.searchName}/followers`),
       this.fetchUserFromGithub(`/users/${this.searchName}/subscriptions`),
       this.searchGithubForUsers(`/search/users?q=${this.searchName}`),
+      this.userLocation(),
     ]);
 
     runInAction("Update State after fetching Github's Data", () => {
@@ -64,6 +73,32 @@ class UserDataStore {
       this.fetchingData = false;
     });
   };
+
+  @action("Search for user location")
+  userLocation() {
+    if (!this.user) return [];
+
+    return Geocode.fromAddress(this.user.location).then(
+      (response) => {
+        const { lat, lng } = response.results[0].geometry.location;
+        runInAction(
+          "Update State after getting user's location coordinates",
+          () => {
+            this.location = [
+              {
+                name: this.user.location,
+                coordinates: [lng, lat],
+                markerOffset: -15,
+              },
+            ];
+          }
+        );
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
   @computed
   get userInfo() {
@@ -93,11 +128,11 @@ class UserDataStore {
   }
 
   @computed
-  get barChartData() {
+  get userChartData() {
     return [
-      { name: "Rep.", pv: this.repos.length },
-      { name: "Fol.", pv: this.followers.length },
-      { name: "Sub.", pv: this.subscriptions.length },
+      { name: "Rep.", amount: this.repos.length },
+      { name: "Fol.", amount: this.followers.length },
+      { name: "Sub.", amount: this.subscriptions.length },
     ];
   }
 }
