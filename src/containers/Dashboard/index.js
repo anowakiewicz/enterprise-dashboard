@@ -7,7 +7,7 @@ import Wrapper from "./Wrapper";
 import Row from "./Row";
 import Column from "./Column";
 import InfoBox from "../../components/InfoBox";
-import ProductionBox from "../../components/ProductionBox";
+import ChartBox from "../../components/ChartBox";
 import WorldMap from "../../components/WorldMap";
 import Summary from "../../components/Summary";
 
@@ -32,7 +32,7 @@ class Dashboard extends Component {
         <Row>{this.infoBoxes}</Row>
         <Row>
           <Column>
-            <ProductionBox />
+            <ChartBox />
             <Summary />
           </Column>
           <Column>

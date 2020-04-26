@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { observer, inject } from "mobx-react";
 import { computed, action } from "mobx";
 import PropTypes from "prop-types";
@@ -33,15 +33,27 @@ class InfoBox extends Component {
     if (data.type !== "search") return null;
 
     return (
-      <Select onChange={this.handleOnSelectChange}>
-        <SelectOption {...data.result} />
-      </Select>
+      <Fragment>
+        <label
+          htmlFor="user-select"
+          style={{ fontSize: "10px", marginLeft: "10px" }}
+        >
+          Similar users:
+        </label>
+        <Select id="user-select" onChange={this.handleOnSelectChange}>
+          <SelectOption {...data.result} />
+        </Select>
+      </Fragment>
     );
   }
 
   render() {
     const { data } = this.props;
-    const name = data.name ? <H2 large>{data.name.login}</H2> : null;
+    const name = data.name ? (
+      <H2 large noMargin>
+        {data.name.login}
+      </H2>
+    ) : null;
 
     return (
       <InfoBoxContainer className>

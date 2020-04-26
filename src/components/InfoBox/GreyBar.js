@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import Colors from "../../consts/Colors";
+
+const { grey_light } = Colors;
 
 const GreyBar = styled.div`
   width: 100%;
@@ -6,7 +9,7 @@ const GreyBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  background-color: #f2f2f2;
+  background-color: ${grey_light};
 `;
 
 export default GreyBar;

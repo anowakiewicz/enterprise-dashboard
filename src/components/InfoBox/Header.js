@@ -8,10 +8,23 @@ const Wrapper = styled.div`
 `;
 
 const Header = ({ type, result }) => {
+  const header = (val) => {
+    switch (val) {
+      case "repos":
+        return result.public_repos || 0;
+      case "followers":
+        return result.followers || 0;
+      case "subscriptions":
+        return result.length;
+      default:
+        return null;
+    }
+  };
+
   return type === "search" ? (
     <SearchInput />
   ) : (
-    <Wrapper>{result.length}</Wrapper>
+    <Wrapper>{header(type)}</Wrapper>
   );
 };
 

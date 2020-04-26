@@ -2,19 +2,19 @@ import { observable, action, runInAction, reaction, computed } from "mobx";
 import axios from "axios";
 import Geocode from "react-geocode";
 
+const API_KEY = process.env.REACT_APP_GEOLOCATION_KEY;
 class UserDataStore {
   @observable searchName;
   @observable searchResults = [];
-  @observable user = null;
+  @observable user = [];
   @observable repos = [];
-  @observable followers = [];
   @observable subscriptions = [];
   @observable fetchingData;
   @observable location;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
-    Geocode.setApiKey("AIzaSyDsKiDe4f6pSRKoW04qDvi3_c76F6jzC_E");
+    Geocode.setApiKey(API_KEY);
 
     reaction(
       () => this.searchName,
@@ -28,7 +28,7 @@ class UserDataStore {
   }
 
   async fetchUserFromGithub(endpoint) {
-    const url = `https://api.github.com${endpoint}?client_id=my_client_id&client_secret=my_client_secret_id`;
+    const url = `https://api.github.com${endpoint}`;
     const response = await axios.get(url, { crossDomain: true });
     return await response.data;
   }
@@ -49,16 +49,9 @@ class UserDataStore {
     if (!this.searchName) return;
     this.fetchingData = true;
 
-    const [
-      user,
-      repos,
-      followers,
-      subscriptions,
-      searchResults,
-    ] = await Promise.all([
+    const [user, repos, subscriptions, searchResults] = await Promise.all([
       this.fetchUserFromGithub(`/users/${this.searchName}`),
       this.fetchUserFromGithub(`/users/${this.searchName}/repos`),
-      this.fetchUserFromGithub(`/users/${this.searchName}/followers`),
       this.fetchUserFromGithub(`/users/${this.searchName}/subscriptions`),
       this.searchGithubForUsers(`/search/users?q=${this.searchName}`),
       this.userLocation(),
@@ -67,7 +60,6 @@ class UserDataStore {
     runInAction("Update State after fetching Github's Data", () => {
       this.user = user;
       this.repos = repos;
-      this.followers = followers;
       this.subscriptions = subscriptions;
       this.searchResults = searchResults;
       this.fetchingData = false;
@@ -111,12 +103,12 @@ class UserDataStore {
       },
       {
         title: "User's repositories",
-        result: this.repos,
+        result: this.user,
         type: "repos",
       },
       {
         title: "User's followers",
-        result: this.followers,
+        result: this.user,
         type: "followers",
       },
       {
@@ -130,8 +122,8 @@ class UserDataStore {
   @computed
   get userChartData() {
     return [
-      { name: "Rep.", amount: this.repos.length },
-      { name: "Fol.", amount: this.followers.length },
+      { name: "Rep.", amount: this.user.public_repos || 0 },
+      { name: "Fol.", amount: this.user.followers || 0 },
       { name: "Sub.", amount: this.subscriptions.length },
     ];
   }

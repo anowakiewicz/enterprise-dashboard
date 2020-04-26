@@ -1,5 +1,7 @@
 import styled from "styled-components";
+import Colors from "../../consts/Colors";
 
+const { grey_dark } = Colors;
 const AppWrapper = styled.div`
   height: 100vh;
   display: flex;
@@ -8,6 +10,7 @@ const AppWrapper = styled.div`
   align-items: center;
   padding: 30px;
   background-color: #f8f8f8;
+  color: ${grey_dark};
 `;
 
 export default AppWrapper;

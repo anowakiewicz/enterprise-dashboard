@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 import { DynamicFeed, Person, BarChart, MoreHoriz } from "@material-ui/icons";
+import Colors from "../../consts/Colors";
+
+const { blue, green, orange, red } = Colors;
 
 const IconWrap = styled.div`
   width: 50px;
@@ -12,19 +15,19 @@ const IconWrap = styled.div`
 `;
 
 const BlueIconWrap = styled(IconWrap)`
-  background-color: #2abfd8;
+  background-color: ${blue};
 `;
 
 const GreenIconWrap = styled(IconWrap)`
-  background-color: #bdd64b;
+  background-color: ${green};
 `;
 
 const OrangeIconWrap = styled(IconWrap)`
-  background-color: #ff9933;
+  background-color: ${orange};
 `;
 
 const RedIconWrap = styled(IconWrap)`
-  background-color: #fc5151;
+  background-color: ${red};
 `;
 
 const Icon = ({ name }) => {

@@ -10,7 +10,7 @@ import "./App.css";
 function App() {
   return (
     <AppWrapper>
-      <H1>Eterprise User Dashboard</H1>
+      <H1>Enterprise User Dashboard</H1>
       <Dashboard />
     </AppWrapper>
   );

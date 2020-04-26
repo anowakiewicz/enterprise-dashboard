@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import Colors from "../../consts/Colors";
+
+const { grey_light } = Colors;
 
 const Select = styled.select`
   width: 50%;
   height: 35px;
-  background: #f2f2f2;
+  background: ${grey_light};
   color: gray;
   padding-left: 5px;
   font-size: 14px;
