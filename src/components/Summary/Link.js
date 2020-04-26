@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import Colors from "../../consts/Colors";
 
-const { red } = Colors;
+const { blue } = Colors;
 const Link = styled.a`
-  color: ${red};
+  position: relative;
+  top: 6px;
+  left: 7px;
+  color: ${blue};
   transition: opacity 0.2s linear;
   &:hover {
     opacity: 0.8;

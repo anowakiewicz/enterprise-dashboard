@@ -68,7 +68,7 @@ class UserDataStore {
 
   @action("Search for user location")
   userLocation() {
-    if (!this.user) return [];
+    if (!this.user.location) return [];
 
     return Geocode.fromAddress(this.user.location).then(
       (response) => {

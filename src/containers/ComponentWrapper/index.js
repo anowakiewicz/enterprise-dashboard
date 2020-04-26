@@ -14,7 +14,7 @@ const ComponentWrapper = styled.div`
   @media (max-width: 1024px) {
     margin-top: unset;
     margin-bottom: ${(props) => props.marginBottom || "unset"};
-    min-height: unset;
+    min-height: 176px;
     height: auto;
   }
 `;

@@ -5,6 +5,9 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   font-size: 4.5em;
   padding: 10px;
+  @media (max-width: 840px) {
+    font-size: 3.5em;
+  }
 `;
 
 const Header = ({ type, result }) => {

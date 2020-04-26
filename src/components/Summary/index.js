@@ -7,8 +7,8 @@ import RecentRepos from "./RecentRepos";
 class Summary extends Component {
   render() {
     return (
-      <ComponentWrapper height="150px">
-        <H2>Summary</H2>
+      <ComponentWrapper height="180px">
+        <H2>Recent repos:</H2>
         <RecentRepos />
       </ComponentWrapper>
     );

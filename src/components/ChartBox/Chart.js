@@ -18,12 +18,12 @@ class Chart extends Component {
 
     return (
       <ResponsiveContainer width="90%" height={330}>
-        <BarChart data={userChartData} maxBarSize={20} layout={"vertical"}>
+        <BarChart data={userChartData} maxBarSize={20} layout="vertical">
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis type={"number"} orientation={"top"} />
-          <YAxis type={"category"} orientation={"left"} dataKey={"name"} />
+          <XAxis type="number" orientation="top" />
+          <YAxis type="category" orientation="left" dataKey="name" />
           <Tooltip></Tooltip>
-          <Bar dataKey={"amount"} fill={"#8884d8"} radius={4} />
+          <Bar dataKey="amount" fill="#8884d8" radius={4} />
         </BarChart>
       </ResponsiveContainer>
     );

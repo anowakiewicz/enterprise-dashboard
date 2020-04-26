@@ -18,7 +18,7 @@ class WorldMap extends Component {
 
   render() {
     return (
-      <ComponentWrapper height="583px">
+      <ComponentWrapper height="612px">
         <H2>User's location</H2>
         <Map setTooltipContent={this.setContent} />
         <ReactTooltip>{this.state.content}</ReactTooltip>
