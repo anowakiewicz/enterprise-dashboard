@@ -9,7 +9,7 @@ class UserDataStore {
   @observable user = [];
   @observable repos = [];
   @observable subscriptions = [];
-  @observable fetchingData;
+  @observable fetchingData = false;
   @observable location;
 
   constructor(rootStore) {

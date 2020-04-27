@@ -1,4 +1,5 @@
 {
+  "homepage": "https://anowakiewicz.github.io/enterprise-dashboard",
   "name": "enterprise-dashboard",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +14,7 @@
     "axios": "^0.19.2",
     "customize-cra": "^0.9.1",
     "formik": "^2.1.4",
+    "gh-pages": "^2.2.0",
     "lodash": "^4.17.15",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
@@ -35,7 +37,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test — env=jsdom",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "predeploy": "react-app-rewired build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

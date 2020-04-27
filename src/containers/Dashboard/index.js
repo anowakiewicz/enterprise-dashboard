@@ -6,10 +6,13 @@ import PropTypes from "prop-types";
 import Wrapper from "./Wrapper";
 import Row from "./Row";
 import Column from "./Column";
+import Overlay from "./Overlay";
 import InfoBox from "../../components/InfoBox";
 import ChartBox from "../../components/ChartBox";
 import WorldMap from "../../components/WorldMap";
 import Summary from "../../components/Summary";
+
+import Spinner from "./Spinner";
 
 @inject("userDataStore")
 @observer
@@ -39,6 +42,9 @@ class Dashboard extends Component {
             <WorldMap />
           </Column>
         </Row>
+        <Overlay active={this.props.userDataStore.fetchingData ? 1 : 0}>
+          <Spinner />
+        </Overlay>
       </Wrapper>
     );
   }
